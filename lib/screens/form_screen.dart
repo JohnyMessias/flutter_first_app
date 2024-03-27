@@ -121,13 +121,15 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if(_formKey.currentState!.validate()){
-                        print(nameController.text);
-                        print(int.parse(difficultController.text));
-                        print(imageController.text);
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('Salvando nova tarefa.'),
+                          print(nameController.text);
+                          print(int.parse(difficultController.text));
+                          print(imageController.text);
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text('Salvando nova tarefa.'),
                         ),
                         );
+                          // Navigator.pop(context);
+                          Navigator.pop(context);
                         }
                       },
                       child: const Text('Adicionar!'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inicio/components/task.dart';
+import 'package:flutter_inicio/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -9,7 +10,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool opacidade = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,26 +23,26 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
         backgroundColor: Colors.blue                                  ,
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1 : 0,
-        duration: const Duration(microseconds: 1000),
-        child: ListView(
-          children: const [
-            Task('Aprender Flutter', 'assets/images/mascote_kotlin.webp', 3),
-            Task('Andar de Bike', 'assets/images/img_bike.webp', 2),
-            Task('Meditar', 'assets/images/img_meditar.webp', 5),
-            Task('Ler', 'assets/images/img_ler.webp', 4),
-            Task('Jogar', 'assets/images/img_kako_gaming.webp', 0),
-            SizedBox(height: 80,)
-          ],
-        ),
+      body: ListView(
+        children: const [
+          Task('Aprender Flutter', 'assets/images/mascote_kotlin.webp', 3),
+          Task('Andar de Bike', 'assets/images/img_bike.webp', 2),
+          Task('Meditar', 'assets/images/img_meditar.webp', 5),
+          Task('Ler', 'assets/images/img_ler.webp', 4),
+          Task('Jogar', 'assets/images/img_kako_gaming.webp', 0),
+          SizedBox(height: 80,)
+        ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        setState(() {
-          opacidade = !opacidade;
-        });
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FormScreen(),
+          ),
+          );
       },
-        child: Icon(opacidade ? Icons.hide_source : Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
     );
   }

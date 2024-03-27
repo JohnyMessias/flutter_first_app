@@ -6,15 +6,14 @@ class Task extends StatefulWidget {
   final String nome;
   final String foto;
   final int dififuldade;
-  const Task(this.nome, this.foto,this.dififuldade, {super.key});
+  Task(this.nome, this.foto,this.dififuldade, {super.key});
 
+  int nivel = 0;
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
-  
   bool isAsset(){
     if(widget.foto.contains('http')){
       return false;
@@ -30,7 +29,7 @@ class _TaskState extends State<Task> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: (nivel/widget.dififuldade) >= 10 ? Colors.green : Colors.blue,
+              color: (widget.nivel/widget.dififuldade) >= 10 ? Colors.green : Colors.blue,
               borderRadius: BorderRadius.circular(4),
             ),
             height: 150,
@@ -83,7 +82,7 @@ class _TaskState extends State<Task> {
                       child: ElevatedButton(
                         onPressed: (){
                           setState(() {
-                            nivel++;
+                            widget.nivel++;
                           });
                         },
                         child: const Column(
@@ -110,13 +109,13 @@ class _TaskState extends State<Task> {
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: widget.dififuldade > 0 ?
-                        (nivel/widget.dififuldade)/10 : 1,
+                        (widget.nivel/widget.dififuldade)/10 : 1,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Nível: $nivel',
+                    child: Text('Nível: ${widget.nivel}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inicio/data/task_inherited.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+  const FormScreen({super.key, required this.taskContext});
 
+  final BuildContext taskContext;
   @override
   State<FormScreen> createState() => _FormScreenState();
 }
@@ -40,7 +42,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: TextFormField(
                       controller: nameController,
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Nome',
                         fillColor: Colors.white70,
@@ -60,7 +62,7 @@ class _FormScreenState extends State<FormScreen> {
                       keyboardType: TextInputType.number,
                       controller: difficultController,
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Dificuldade',
                         fillColor: Colors.white70,
@@ -85,7 +87,7 @@ class _FormScreenState extends State<FormScreen> {
                       keyboardType: TextInputType.url,
                       controller: imageController,
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Imagem',
                         fillColor: Colors.white70,
@@ -121,11 +123,13 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if(_formKey.currentState!.validate()){
-                          print(nameController.text);
-                          print(int.parse(difficultController.text));
-                          print(imageController.text);
+                          TaskInherited.of(widget.taskContext).newTask(
+                              nameController.text,
+                              imageController.text,
+                              int.parse(difficultController.text)
+                          );
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text('Salvando nova tarefa.'),
+                            content: Text('Criando uma nova tarefa.'),
                         ),
                         );
                           // Navigator.pop(context);
